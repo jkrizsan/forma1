@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forma1.Web", "Forma1.Web\Fo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forma1.Data", "Forma1.Data\Forma1.Data.csproj", "{9ED64ACE-8505-4BAF-B1C9-61D08353A699}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forma1.Test", "Forma1.Test\Forma1.Test.csproj", "{08BA7F2F-5D6B-4FAD-9658-CB7F3E3A4440}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forma1.Test", "Forma1.Test\Forma1.Test.csproj", "{08BA7F2F-5D6B-4FAD-9658-CB7F3E3A4440}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forma1.Services", "Forma1.Services\Forma1.Services.csproj", "{7FA5BD21-AA39-429C-B304-A15FBDA868C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forma1.Services", "Forma1.Services\Forma1.Services.csproj", "{7FA5BD21-AA39-429C-B304-A15FBDA868C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

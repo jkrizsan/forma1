@@ -2,9 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Forma1.Data;
+using Forma1.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +28,16 @@ namespace Forma1.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddScoped<ITeamService, TeamService>();
+
+            var options = new DbContextOptionsBuilder<Context>()
+                      .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                     .Options;
+
+            //services.AddDbContext<Context>(options =>
+            //    options.UseSqlite("").UseInMemoryDatabase(Guid.NewGuid().ToString()));
+
+            services.AddEntityFrameworkSqlite().AddDbContext<Context>(opt => opt.UseInMemoryDatabase(databaseName: "Test1"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +54,7 @@ namespace Forma1.Web
                 app.UseHsts();
             }
 
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -49,7 +64,9 @@ namespace Forma1.Web
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Team}/{action=Index}");
             });
         }
     }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Forma1.Services
 {
-    interface ITeamService
+    public interface ITeamService
     {
         void Add(Team team);
         void RemoveById(int id);
