@@ -1,12 +1,13 @@
 ﻿using Forma1.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace Forma1.Data
 {
-    public class Context: DbContext
+    public class Context: IdentityDbContext
     {
-        public Context(DbContextOptions options) : base(options)
+        public Context(DbContextOptions<Context> options) : base(options)
         {
         }
 

@@ -1,5 +1,6 @@
 ﻿using Forma1.Data;
 using Forma1.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,8 +47,7 @@ namespace Forma1.Services
 
         public void Update(Team team)
         {
-            var oldTeam = GetById(team.Id);
-            oldTeam = team;
+            context.Teams.Update(team);
             context.SaveChanges();
         }
     }
