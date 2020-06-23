@@ -1,19 +1,13 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Forma1.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Forma1.Services;
-//using Microsoft.AspNet.Identity.EntityFramework;
 using Forma1.Data.Models;
 using FluentValidation.AspNetCore;
 using FluentValidation;
@@ -39,7 +33,7 @@ namespace Forma1.Web
             services.AddTransient<IValidator<Team>, TeamValidator>(); 
 
             services.AddScoped<ITeamService, TeamService>();
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<Context>();
             
             var options = new DbContextOptionsBuilder<Context>()
@@ -52,8 +46,8 @@ namespace Forma1.Web
                 // Password settings.
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
-                options.Password.RequireNonAlphanumeric = true;
-                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 1;
 
@@ -81,7 +75,7 @@ namespace Forma1.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<IdentityUser> userManager)
         {
             if (env.IsDevelopment())
             {
@@ -94,6 +88,7 @@ namespace Forma1.Web
                 app.UseHsts();
             }
 
+            DataInitializer.SeedUsers(userManager, Configuration);
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
