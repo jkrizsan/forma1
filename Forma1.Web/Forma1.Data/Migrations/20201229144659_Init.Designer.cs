@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Forma1.Data.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20201229140502_Init")]
+    [Migration("20201229144659_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
