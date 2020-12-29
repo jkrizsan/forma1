@@ -20,8 +20,8 @@ namespace Forma1.Test
         public void Setup()
         {
             var options = new DbContextOptionsBuilder<Context>()
-                      .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                      .Options;
+                      .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
+
             var context = new Context(options);
             TeamService = new TeamService(context);
         }

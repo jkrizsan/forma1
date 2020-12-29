@@ -35,12 +35,13 @@ namespace Forma1.Web
             services.AddScoped<ITeamService, TeamService>();
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<Context>();
-            
-            var options = new DbContextOptionsBuilder<Context>()
-                      .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                     .Options;
 
-            services.AddEntityFrameworkSqlite().AddDbContext<Context>(opt => opt.UseInMemoryDatabase(databaseName: "Test1"));
+            var options = new DbContextOptionsBuilder<Context>().Options;
+
+            services.AddDbContext<Context>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("Connection")));
+
+            //services.AddEntityFrameworkSqlite().AddDbContext<Context>(opt => opt.UseInMemoryDatabase(databaseName: "Forma1"));
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
