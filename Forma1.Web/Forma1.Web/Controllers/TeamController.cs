@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Forma1.Data.Models;
+﻿using Forma1.Data.Models;
 using Forma1.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -12,23 +8,25 @@ namespace Forma1.Web.Controllers
 {
     public class TeamController : Controller
     {
-        private readonly string loginPagePath = "/Identity/Account/Login";
+        private readonly string _loginPagePath = "/Identity/Account/Login";
 
-        private ITeamService teamService;
-        private UserManager<IdentityUser> userManager;
-        private SignInManager<IdentityUser> signInManager;
+        private ITeamService _teamService;
+        private UserManager<IdentityUser> _userManager;
+        private SignInManager<IdentityUser> _signInManager;
 
-        public TeamController(ITeamService teamService, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public TeamController(ITeamService teamService,
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager)
         {
-            this.teamService = teamService;
-            this.userManager = userManager;
-            this.signInManager = signInManager;
+            _teamService = teamService;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         // GET: TeamController
         public ActionResult Index()
         {
-            var teams = teamService.GetAll();
+            var teams = _teamService.GetAll();
             return View(teams);
         }
 
@@ -45,14 +43,13 @@ namespace Forma1.Web.Controllers
             {
                 return View();
             }
-            return LocalRedirect(loginPagePath);
+            return LocalRedirect(_loginPagePath);
         }
 
         private IdentityUser GetCurrentUser()
         {
-            return userManager.GetUserAsync(HttpContext.User).Result;
+            return _userManager.GetUserAsync(HttpContext.User).Result;
         }
-
 
         // POST: TeamController/Create
         [HttpPost]
@@ -61,7 +58,7 @@ namespace Forma1.Web.Controllers
         {
             try
             {
-                teamService.Add(team);
+                _teamService.Add(team);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -75,10 +72,10 @@ namespace Forma1.Web.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                var team = teamService.GetById(id);
+                var team = _teamService.GetById(id);
                 return View(team);
             }
-            return LocalRedirect(loginPagePath);   
+            return LocalRedirect(_loginPagePath);   
         }
 
         // POST: TeamController/Edit/5
@@ -88,7 +85,7 @@ namespace Forma1.Web.Controllers
         {
             try
             {
-                teamService.Update(team);
+                _teamService.Update(team);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -102,10 +99,10 @@ namespace Forma1.Web.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                var team = teamService.GetById(id);
+                var team = _teamService.GetById(id);
                 return View(team);
             }
-            return LocalRedirect(loginPagePath);
+            return LocalRedirect(_loginPagePath);
         }
 
         // POST: TeamController/Delete/5
@@ -115,7 +112,7 @@ namespace Forma1.Web.Controllers
         {
             try
             {
-                teamService.RemoveById(id);
+                _teamService.RemoveById(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

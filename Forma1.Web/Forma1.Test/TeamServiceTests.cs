@@ -10,60 +10,61 @@ namespace Forma1.Test
 {
     public class Tests
     {
-        TeamService TeamService;
-        int TestInt = 1;
-        int TestYear = 2010;
-        string TestString = "test";
-        string TestString2 = "test2";
+        TeamService _teamService;
+
+        int _testInt = 1;
+        int _testYear = 2010;
+        string _testString = "test";
+        string _testString2 = "test2";
 
         [SetUp]
         public void Setup()
         {
             var options = new DbContextOptionsBuilder<Context>()
-                      .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
+                .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
 
             var context = new Context(options);
-            TeamService = new TeamService(context);
+            _teamService = new TeamService(context);
         }
 
         [Test]
         public void AddTest()
         {
-            TeamService.Add(new Team()
+            _teamService.Add(new Team()
             { 
-                Name = TestString,
-                NumberOfWonWorldChampionship = TestInt,
-                YearOfFoundation = TestYear,
+                Name = _testString,
+                NumberOfWonWorldChampionship = _testInt,
+                YearOfFoundation = _testYear,
                 PaidEntryFee = true 
             });
 
-            var team = TeamService.GetById(1);
+            var team = _teamService.GetById(1);
 
-            Assert.AreEqual(team.Name, TestString);
-            Assert.AreEqual(team.NumberOfWonWorldChampionship, TestInt);
-            Assert.AreEqual(team.YearOfFoundation, TestYear);
+            Assert.AreEqual(team.Name, _testString);
+            Assert.AreEqual(team.NumberOfWonWorldChampionship, _testInt);
+            Assert.AreEqual(team.YearOfFoundation, _testYear);
         }
 
         [Test]
         public void GetAllTest()
         {
-            TeamService.Add(new Team()
+            _teamService.Add(new Team()
             {
-                Name = TestString,
-                NumberOfWonWorldChampionship = TestInt,
-                YearOfFoundation = TestYear,
+                Name = _testString,
+                NumberOfWonWorldChampionship = _testInt,
+                YearOfFoundation = _testYear,
                 PaidEntryFee = true
             });
 
-            TeamService.Add(new Team()
+            _teamService.Add(new Team()
             {
-                Name = TestString,
-                NumberOfWonWorldChampionship = TestInt,
-                YearOfFoundation = TestYear,
+                Name = _testString,
+                NumberOfWonWorldChampionship = _testInt,
+                YearOfFoundation = _testYear,
                 PaidEntryFee = true
             });
 
-            var teams = TeamService.GetAll();
+            var teams = _teamService.GetAll();
 
             Assert.AreEqual(teams.Count(), 2);
             
@@ -72,17 +73,17 @@ namespace Forma1.Test
         [Test]
         public void RemoveTest()
         {
-            TeamService.Add(new Team()
+            _teamService.Add(new Team()
             {
-                Name = TestString,
-                NumberOfWonWorldChampionship = TestInt,
-                YearOfFoundation = TestYear,
+                Name = _testString,
+                NumberOfWonWorldChampionship = _testInt,
+                YearOfFoundation = _testYear,
                 PaidEntryFee = true
             });
 
-            TeamService.RemoveById(1);
+            _teamService.RemoveById(1);
 
-            var team = TeamService.GetById(1);
+            var team = _teamService.GetById(1);
 
             Assert.IsNull(team);
         }
@@ -92,23 +93,23 @@ namespace Forma1.Test
         {
             var team = new Team()
             {
-                Name = TestString,
-                NumberOfWonWorldChampionship = TestInt,
-                YearOfFoundation = TestYear,
+                Name = _testString,
+                NumberOfWonWorldChampionship = _testInt,
+                YearOfFoundation = _testYear,
                 PaidEntryFee = true
             };
 
-            TeamService.Add(team);
+            _teamService.Add(team);
 
-            team.Name = TestString2;
+            team.Name = _testString2;
 
-            TeamService.Update(team);
+            _teamService.Update(team);
 
-            TeamService.Update(team);
+            _teamService.Update(team);
 
-            var team2 = TeamService.GetById(1);
+            var team2 = _teamService.GetById(1);
 
-            Assert.AreEqual(team2.Name, TestString2);
+            Assert.AreEqual(team2.Name, _testString2);
         }
 
     }

@@ -1,21 +1,24 @@
-﻿using Forma1.Data;
-using Forma1.Data.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Forma1.Data;
+using Forma1.Data.Models;
 
 namespace Forma1.Services
 {
+    /// <summary>
+    /// Team Service
+    /// </summary>
     public class TeamService : ITeamService
     {
-        Context context;
+        private Context _context;
 
         public TeamService(Context context)
         {
-            this.context = context;
+            _context = context;
         }
 
+        ///<inheritdoc/>
         public void Add(Team team)
         {
             if (team is null)
@@ -23,32 +26,36 @@ namespace Forma1.Services
                 throw new ArgumentNullException(nameof(Add));
             }
 
-            context.Teams.Add(team);
-            context.SaveChanges();
+            _context.Teams.Add(team);
+            _context.SaveChanges();
         }
 
+        ///<inheritdoc/>
         public IEnumerable<Team> GetAll()
         {
-            return context.Teams.ToList();
+            return _context.Teams.ToList();
         }
 
+        ///<inheritdoc/>
         public Team GetById(int id)
         {
-            var team = context.Teams.Where(t => t.Id.Equals(id)).SingleOrDefault();
+            var team = _context.Teams.Where(t => t.Id.Equals(id)).SingleOrDefault();
             return team;
         }
 
+        ///<inheritdoc/>
         public void RemoveById(int id)
         {
             var team = GetById(id);
-            context.Teams.Remove(team);
-            context.SaveChanges();
+            _context.Teams.Remove(team);
+            _context.SaveChanges();
         }
 
+        ///<inheritdoc/>
         public void Update(Team team)
         {
-            context.Teams.Update(team);
-            context.SaveChanges();
+            _context.Teams.Update(team);
+            _context.SaveChanges();
         }
     }
 }
