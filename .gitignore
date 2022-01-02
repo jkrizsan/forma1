@@ -51,3 +51,6 @@ bin/ 	# ignore bin directory
 /Forma1.Web/Forma1.Services/bin/Debug/netcoreapp3.1
 /Forma1.Web/Forma1.Test/bin/Debug/netcoreapp3.1
 /Forma1.Web/Forma1.Web/bin/Debug/netcoreapp3.1
+/Forma1.Web/Forma1.Services/obj
+/Forma1.Web/Forma1.Test/obj
+/Forma1.Web/Forma1.Web/obj
