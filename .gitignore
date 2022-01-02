@@ -25,3 +25,29 @@ Forma1.Web/.vs/Forma1.Web/v16/TestStore/0/001.testlog
 Forma1.Web/.vs/Forma1.Web/v16/.suo
 *.dll
 *.dll
+/.vs
+*.lock
+MVP/.vs/MVP/v16/.suo
+*.ide
+*.ide-shm
+*.ide-wal
+*.testlog
+*.manifest
+MVP/Data/bin/Debug/netstandard2.0/Data.deps.json
+*.dll
+*.pdb
+*.exe
+*.cache
+*.props
+*.targets
+*.suo
+/obj/
+/.vs/
+bin/ 	# ignore bin directory 
+*.obj 	# ignore any files with .obj postfix 
+/Forma1.Web/.vs/Forma1.Web
+/Forma1.Web/Forma1.Data/bin/Debug/netcoreapp3.1
+/Forma1.Web/Forma1.Data/obj/Debug/netcoreapp3.1
+/Forma1.Web/Forma1.Services/bin/Debug/netcoreapp3.1
+/Forma1.Web/Forma1.Test/bin/Debug/netcoreapp3.1
+/Forma1.Web/Forma1.Web/bin/Debug/netcoreapp3.1
